@@ -1,7 +1,7 @@
 class Rover
-  attr_reader :x, :y, :maxX, :maxY, :orientation, :instructions
+  attr_accessor :x, :y, :maxX, :maxY, :orientation, :instructions
 
-  def initialize(x=0, y=0, maxX, maxY, orientation='N', instructions)
+  def initialize(x=0, y=0, maxX, maxY, orientation, instructions)
     @x = x
     @y = y
     @maxX = maxX
@@ -15,11 +15,11 @@ class Rover
   end
 
   def navigate
-    @instructions.split('').each do |instruction|
+    @instructions.split(' ').each do |instruction|
       if instruction == 'M'
         move
       else
-        rotate(instruction)
+        rotate(instruction.to_sym)
       end
     end
   end
@@ -27,48 +27,55 @@ class Rover
   private
 
   def move
-    case @orientation
-    when 'N' then @y += 1 if @y < @maxY
-    when 'S' then @y -= 1 if @y > 0
-    when 'E' then @x += 1 if @x < @maxX
-    when 'W' then @x -= 1 if @x > 0
+    puts "Position #{position}..."
+    case @orientation.to_sym
+    when :N then @y += 1 if @y < @maxY
+    when :S then @y -= 1 if @y > 0
+    when :E then @x += 1 if @x < @maxX
+    when :W then @x -= 1 if @x > 0
     end
+    puts "Position #{position}..."
   end
 
   def rotate(direction)
-    case direction
-    when 'L' then turn_left
-    when 'R' then turn_right
-    end
+    puts "Turning #{direction}..."
+    turn_left if direction == 'L'.to_sym
+    turn_right if direction == 'R'.to_sym
   end
 
   def turn_left
-    case @orientation
-    when 'N'
+    puts "Turning left..."
+    puts "Facing #{@orientation}..."
+    case @orientation.to_sym
+    when :N
       @orientation = 'W'
-    when 'E'
+    when :E
       @orientation = 'N'
-    when 'S'
+    when :S
       @orientation = 'E'
-    when 'W'
+    when :W
       @orientation = 'S'
     else
-      break
+      @orientation = @orientation
     end
+    puts "Now facing #{@orientation}..."
   end
 
   def turn_right
-    case @orientation
-    when 'N'
+    puts "Turning right..."
+    puts "Facing #{@orientation}..."
+    case @orientation.to_sym
+    when :N
       @orientation = 'E'
-    when 'E'
+    when :E
       @orientation = 'S'
-    when 'S'
+    when :S
       @orientation = 'W'
-    when 'W'
+    when :W
       @orientation = 'N'
     else
-      break
+      @orientation = @orientation
     end
+    puts "Now facing #{@orientation}..."
   end
 end
