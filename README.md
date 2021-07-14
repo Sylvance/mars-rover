@@ -1,5 +1,28 @@
 # Mars rover problem
+
 Mars rover problem
+
+## Running the solution
+
+- To run do:
+  ```shell
+  ruby lib/mars_rover.rb [Input]
+  ```
+- For instance:
+  ```shell
+  ruby lib/mars_rover.rb "5 5\n1 2 N\nL M L M L M L M M\n3 3 E\nM M R M M R M R R M"
+  ```
+- Alternatively, run it interactively via `irb`:
+
+  ```shell
+  irb -r ./lib/mars_rover.rb
+
+  > irb(main):001:1> MarsRover.run("5 5\n1 2 N\nL M L M L M L M M\n3 3 E\nM M R M M R M R R M")
+  1 3 N
+  5 1 E
+
+  > irb(main):002:0> exit
+  ```
 
 ## Coding Problem
 
@@ -12,17 +35,19 @@ representing one of the four cardinal compass points. The plateau is
 divided up into a grid to simplify navigation.
 
 An example;
+
 - position might be `0, 0, N`, which means the rover is in the bottom
   left corner and facing North.In order to control a rover, NASA sends a simple
   string of letters.
 - The possible letters are `L`, `R` and `M`.
-- `L` and `R` makes the rover spin `90 degrees` left or right respectively, 
+- `L` and `R` makes the rover spin `90 degrees` left or right respectively,
   without moving from its current spot.
 - `M` means move forward one grid point, and maintain the
   same Heading.
 - Assume that the square directly North from (x, y) is (x, y+1).
 
 ### INPUT:
+
 The first line of input is the upper-right coordinates of the plateau, the
 lower- left coordinates are assumed to be 0,0. The rest of the input is
 information pertaining to the rovers that have been deployed.
@@ -34,9 +59,11 @@ orientation. Each rover will be finished sequentially, which means that the
 second rover won’t start to move until the first one has finished moving.
 
 ### OUTPUT:
+
 The output for each rover should be its final co-ordinates and heading.
 
 ### INPUT AND OUTPUT:
+
 - Test Input:
 
 ```txt
@@ -48,6 +75,7 @@ M M R M M R M R R M
 ```
 
 - Expected Output:
+
 ```txt
 1 3 N
 5 1 E

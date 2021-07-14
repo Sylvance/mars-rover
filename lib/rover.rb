@@ -27,25 +27,20 @@ class Rover
   private
 
   def move
-    puts "Position #{position}..."
     case @orientation.to_sym
     when :N then @y += 1 if @y < @maxY
     when :S then @y -= 1 if @y > 0
     when :E then @x += 1 if @x < @maxX
     when :W then @x -= 1 if @x > 0
     end
-    puts "Position #{position}..."
   end
 
   def rotate(direction)
-    puts "Turning #{direction}..."
     turn_left if direction == 'L'.to_sym
     turn_right if direction == 'R'.to_sym
   end
 
   def turn_left
-    puts "Turning left..."
-    puts "Facing #{@orientation}..."
     case @orientation.to_sym
     when :N
       @orientation = 'W'
@@ -58,12 +53,9 @@ class Rover
     else
       @orientation = @orientation
     end
-    puts "Now facing #{@orientation}..."
   end
 
   def turn_right
-    puts "Turning right..."
-    puts "Facing #{@orientation}..."
     case @orientation.to_sym
     when :N
       @orientation = 'E'
@@ -76,6 +68,5 @@ class Rover
     else
       @orientation = @orientation
     end
-    puts "Now facing #{@orientation}..."
   end
 end

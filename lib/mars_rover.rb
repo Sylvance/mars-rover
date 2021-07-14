@@ -1,4 +1,4 @@
-require "rover"
+require_relative "../lib/rover"
 class MarsRover
   attr_reader :instruction_set
 
@@ -50,3 +50,5 @@ class MarsRover
     return result
   end
 end
+
+MarsRover.run("5 5\n1 2 N\nL M L M L M L M M\n3 3 E\nM M R M M R M R R M")
