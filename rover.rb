@@ -1,9 +1,11 @@
 class Rover
-  attr_reader :x, :y, :orientation
+  attr_reader :x, :y, :maxX, :maxY, :orientation
 
-  def initialize(x=0, y=0, orientation='N')
+  def initialize(x=0, y=0, maxX, maxY, orientation='N')
     @x = x
     @y = y
+    @maxX = maxX
+    @maxY = maxY
     @orientation = orientation
   end
 
@@ -20,10 +22,10 @@ class Rover
 
   def move
     case @orientation
-    when 'N' then @y += 1
-    when 'S' then @y -= 1
-    when 'E' then @x += 1
-    when 'W' then @x -= 1
+    when 'N' then @y += 1 if @y < @maxY
+    when 'S' then @y -= 1 if @y > 0
+    when 'E' then @x += 1 if @x < @maxX
+    when 'W' then @x -= 1 if @x > 0
     end
   end
 
