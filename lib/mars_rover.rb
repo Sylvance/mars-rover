@@ -7,7 +7,7 @@ class MarsRover
   end
 
   def initialize(instruction_set)
-    @instruction_set = instruction_set
+    @instruction_set = instruction_set.split("\n")
     @maxX = 0
     @maxY = 0
     @rovers = []
@@ -42,10 +42,11 @@ class MarsRover
   def navigate_rovers
     @rovers.each do |rover|
       rover.navigate
-      puts rover.position
       @rover_positions << rover.position
     end
 
-    return @rover_positions.join("\n")
+    result = @rover_positions.join("\n")
+    puts result
+    return result
   end
 end
