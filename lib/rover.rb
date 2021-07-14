@@ -1,24 +1,30 @@
 class Rover
-  attr_reader :x, :y, :maxX, :maxY, :orientation
+  attr_reader :x, :y, :maxX, :maxY, :orientation, :instructions
 
-  def initialize(x=0, y=0, maxX, maxY, orientation='N')
+  def initialize(x=0, y=0, maxX, maxY, orientation='N', instructions)
     @x = x
     @y = y
     @maxX = maxX
     @maxY = maxY
     @orientation = orientation
+    @instructions = instructions
   end
 
   def position
     "#{@x} #{@y} #{@orientation}"
   end
 
-  def rotate(direction)
-    case direction
-    when 'L' then turn_left
-    when 'R' then turn_right
+  def navigate
+    @instructions.split('').each do |instruction|
+      if instruction == 'M'
+        move
+      else
+        rotate(instruction)
+      end
     end
   end
+
+  private
 
   def move
     case @orientation
@@ -29,7 +35,12 @@ class Rover
     end
   end
 
-  private
+  def rotate(direction)
+    case direction
+    when 'L' then turn_left
+    when 'R' then turn_right
+    end
+  end
 
   def turn_left
     case @orientation
