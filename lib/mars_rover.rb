@@ -1,7 +1,8 @@
+require "rover"
 class MarsRover
   attr_reader :instruction_set
 
-  def run
+  def self.run(instruction_set)
     new(instruction_set).call
   end
 
@@ -10,6 +11,7 @@ class MarsRover
     @maxX = 0
     @maxY = 0
     @rovers = []
+    @rover_positions = []
   end
 
   def call
@@ -41,6 +43,9 @@ class MarsRover
     @rovers.each do |rover|
       rover.navigate
       puts rover.position
+      @rover_positions << rover.position
     end
+
+    return @rover_positions.join("\n")
   end
 end
